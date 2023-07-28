@@ -1,13 +1,10 @@
 import axios from 'axios';
-import { giveResponse } from './render-option';
+import { refs } from './refs';
 
 export function fetchBreeds() {
-  axios
-    .get('https://api.thecatapi.com/v1/breeds')
-    .then(response => giveResponse(response))
-    .catch(error => {
-      console.log(error);
-    });
+  return axios.get('https://api.thecatapi.com/v1/breeds').catch(error => {
+    console.log(error);
+  });
 }
 
 export function fetchCatByBreed(breedId) {
@@ -17,6 +14,5 @@ export function fetchCatByBreed(breedId) {
 
   return axios
     .get(`https://api.thecatapi.com/v1/images/search?${parahms}`)
-    .then(response => response.data)
     .catch(error => console.log(error));
 }
