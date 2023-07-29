@@ -1,18 +1,21 @@
 import axios from 'axios';
-import { refs } from './refs';
+import { loader } from './loader';
+import { errorStart } from './error';
 
 export function fetchBreeds() {
-  return axios.get('https://api.thecatapi.com/v1/breeds').catch(error => {
-    console.log(error);
-  });
+  loader();
+  return axios
+    .get('https://api.thecatapi.com/v1/breeds')
+    .catch(error => errorStart(error));
 }
 
 export function fetchCatByBreed(breedId) {
+  loader();
   const parahms = new URLSearchParams({
     breed_ids: breedId,
   });
 
   return axios
     .get(`https://api.thecatapi.com/v1/images/search?${parahms}`)
-    .catch(error => console.log(error));
+    .catch(error => errorStart(error));
 }

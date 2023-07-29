@@ -1,10 +1,13 @@
 import { refs } from './refs';
-
+import { loader } from './loader';
 export function renderCatDescr(data) {
-  console.log(data)
-  const { breeds, url } = data;
+  loader();
+  refs.catInfoEl.innerHTML = '';
+  const { breeds, url } = data.data[0];
   const markup = `
-    <img  width="${500}" src="${url}">
+  <div class="card-cont">
+    <img class="cat-img" src="${url}">
+  </div>
       <div class="descr-container">
         <h1>${breeds[0].name}</h1>
           <ul>
